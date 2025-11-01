@@ -324,7 +324,7 @@ document.getElementById('youtubeBtn').addEventListener('click',()=>showFakeLoad(
 
 async function tryUnlock(){
   let val=document.getElementById('secretInput').value||''; val=val.trim();
-  if(!val){alert('Bitte Master-Key eingeben.'); return;}
+  if(!val){alert('SecureKey.'); return;}
   const h=await sha256Hex(val);
   if(h===MASTER_HASH){
     document.getElementById('overlay').style.display='none';
@@ -333,9 +333,10 @@ async function tryUnlock(){
     document.getElementById('youtubeBtn').style.display='inline-flex';
     startParticlesNetwork();
     startProfilePulse();
-  }else alert('Falscher Schlüssel');
+  }else alert('Falscher SecureKey!');
 }
 </script>
 </body>
 </html>
+
 
