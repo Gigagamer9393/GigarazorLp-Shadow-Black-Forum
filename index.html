@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GigarazorLp — Cyber Neon Forum 2025</title>
+<style>
+:root{
+  --bg1:#0b0310;
+  --bg2:#260433;
+  --accent:#9b5cff;
+  --neon:#6cffea;
+  --card: rgba(255,255,255,0.03);
+  --muted: rgba(255,255,255,0.6);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+  background: radial-gradient(800px 500px at 10% 10%, rgba(155,92,255,0.08), transparent),
+              linear-gradient(180deg,var(--bg1),var(--bg2));
+  color:#fff;
+  padding:28px;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  perspective:1000px;
+  overflow-x:hidden;
+}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
+.brand{display:flex;gap:14px;align-items:center}
+.neon-title{
+  font-family:'Impact','Arial Black',serif;
+  font-size:48px;
+  color:#fff;
+  padding:6px 12px;
+  border-radius:10px;
+  text-transform:uppercase;
+  text-shadow:0 0 12px rgba(155,92,255,0.9),0 0 30px rgba(107,57,217,0.7),0 0 60px rgba(107,57,217,0.4);
+  animation: neon-flicker 3.5s infinite, lightning 1.2s infinite;
+}
+@keyframes neon-flicker{
+  0%,100%{filter:brightness(1);text-shadow:0 0 18px rgba(155,92,255,0.95),0 0 40px rgba(107,57,217,0.8)}
+  50%{filter:brightness(0.7);text-shadow:0 0 8px rgba(155,92,255,0.6)}
+}
+@keyframes lightning{
+  0%,100%{text-shadow:0 0 20px rgba(155,92,255,0.9),0 0 50px rgba(107,57,217,0.8)}
+  10%,30%,50%,70%,90%{text-shadow:0 0 40px rgba(155,92,255,1),0 0 80px rgba(107,57,217,0.9)}
+}
+.top-right{display:flex;align-items:center;gap:12px;position:relative}
+.profile-gif{
+  position: relative;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  overflow:hidden;
+  border:2px solid rgba(255,255,255,0.06);
+  box-shadow:0 6px 20px rgba(155,92,255,0.18);
+  transition:transform 0.3s ease;
+}
+.profile-gif img{width:100%;height:100%;object-fit:cover;display:block}
+.profile-gif::before{
+  content:'';
+  position:absolute;
+  top:-6px; left:-6px;
+  width:calc(100% + 12px);
+  height:calc(100% + 12px);
+  border-radius:50%;
+  border:2px solid rgba(107,57,217,0.6);
+  box-shadow:0 0 8px var(--neon),0 0 20px var(--accent),0 0 40px rgba(155,92,255,0.4);
+  animation: neon-spin 3s linear infinite, neon-pulse 2.6s infinite;
+}
+@keyframes neon-spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+@keyframes neon-pulse{0%,100%{opacity:0.6}50%{opacity:1}}
+main{display:grid;grid-template-columns:1fr 360px;gap:20px}
+.card{
+  background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
+  border-radius:14px;
+  padding:18px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.6);
+  transition:transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style:preserve-3d;
+  perspective:1000px;
+}
+.card-inner{
+  transition: transform 0.2s ease-out, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+}
+.card:hover .card-inner{
+  animation: pulseCard 2s infinite alternate;
+}
+@keyframes pulseCard{
+  0% { transform: rotateY(var(--rotateY,0deg)) rotateX(var(--rotateX,0deg)) translateZ(10px) scale(1); }
+  50% { transform: rotateY(var(--rotateY,0deg)) rotateX(var(--rotateX,0deg)) translateZ(12px) scale(1.02); }
+  100% { transform: rotateY(var(--rotateY,0deg)) rotateX(var(--rotateX,0deg)) translateZ(14px) scale(1.04); }
+}
+.comments{display:flex;flex-direction:column;gap:12px}
+.comment{position:relative;display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:12px;background:var(--card);border:1px solid rgba(155,92,255,0.06);transition:transform 0.3s ease, box-shadow 0.3s ease;transform-style:preserve-3d;}
+.comment:hover{box-shadow:0 12px 24px var(--accent),0 0 12px var(--neon);}
+.comment-body{flex:1;transform:translateZ(10px)}
+.comment-gif{width:40px;height:40px;border-radius:50%;overflow:hidden;box-shadow:0 4px 14px rgba(155,92,255,0.4);transition:transform 0.3s ease;transform:translateZ(12px);}
+.comment-gif img{width:100%;height:100%;object-fit:cover;display:block}
+.comment-gif:hover{transform:rotateY(360deg) scale(1.15);}
+.glow-dot{position:absolute;right:-18px;top:18px;width:18px;height:18px;border-radius:50%;background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.18), rgba(155,92,255,0.6));box-shadow:0 0 18px rgba(155,92,255,0.7),0 0 40px rgba(155,92,255,0.12);animation: pulse3D 2.6s infinite;pointer-events:none;transform-origin:center;}
+@keyframes pulse3D{0%,100%{transform:scale(0.9) translateZ(0px);opacity:0.9}50%{transform:scale(1.35) translateZ(6px);opacity:0.6}}
+aside{position:sticky;top:28px;height:calc(100vh - 56px);overflow:auto;padding-bottom:40px}
+.links button{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;background:linear-gradient(90deg,var(--accent),#6b39d9);color:white;border:none;cursor:pointer;font-weight:700;margin-bottom:8px;display:none;transition:box-shadow 0.3s ease;}
+.links button:hover{box-shadow:0 0 16px var(--neon),0 0 28px var(--accent),0 0 8px #fff inset;transform:scale(1.05);}
+.overlay{position:fixed;inset:0;background:linear-gradient(180deg,rgba(11,3,16,0.92),rgba(38,4,51,0.92));display:flex;align-items:center;justify-content:center;z-index:999}
+.login-box{width:460px;max-width:94%;padding:28px;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));box-shadow:0 20px 60px rgba(0,0,0,0.7);text-align:center;transform-style:preserve-3d;}
+.login-box input{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit;margin-top:12px}
+.login-box .btn{margin-top:12px;padding:10px 16px;border-radius:10px;border:none;background:linear-gradient(90deg,var(--accent),#6b39d9);color:white;font-weight:700;cursor:pointer;transition:box-shadow 0.3s ease;}
+.login-box .btn:hover{box-shadow:0 0 16px var(--neon),0 0 28px var(--accent);}
+#particlesCanvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+#loadOverlay{position:fixed;inset:0;background:linear-gradient(180deg,rgba(11,3,16,0.92),rgba(38,4,51,0.92));display:flex;align-items:center;justify-content:center;z-index:1000;display:none}
+#progressBar{width:300px;height:10px;background:rgba(255,255,255,0.1);border-radius:6px;margin-top:16px;overflow:hidden}
+#progress{width:0%;height:100%;background:linear-gradient(90deg,var(--neon),#9b5cff);border-radius:6px;transition:width 0.2s ease;}
+@media(max-width:980px){main{grid-template-columns:1fr}aside{position:relative;height:auto}}
+</style>
+</head>
+<body>
+
+<canvas id="particlesCanvas"></canvas>
+
+<header>
+<div class="brand"><div class="logo"><span class="neon-title">GigarazorLp</span></div></div>
+<div class="top-right"><div class="profile-gif"><img src="profile.gif" alt="Profil GIF"></div></div>
+</header>
+
+<main>
+<section>
+<div class="card"><div class="card-inner"><strong style="font-size:16px">Shadow-Black - GigarazorLp Forum!)</strong><p style="color:var(--muted);margin-top:6px">Willkommen!.</p></div></div>
+<div class="card" style="margin-top:14px"><div class="card-inner"><strong>Kommentare</strong><div id="comments" class="comments"></div></div></div>
+</section>
+<aside>
+<div class="card links"><div class="card-inner"><strong>Links</strong>
+<button id="discordBtn">Discord</button>
+<button id="youtubeBtn">YouTube</button>
+</div></div>
+</aside>
+</main>
+
+<div id="overlay" class="overlay">
+<div class="login-box">
+<h2>Secure Login — GigarazorLp</h2>
+<div style="color:var(--muted);font-size:13px">Gib deinen Master-Key ein (nur Hash wird geprüft)</div>
+<input id="secretInput" placeholder="Dein Master-Key">
+<button id="loginBtn" class="btn">Unlock</button>
+</div>
+</div>
+
+<div id="loadOverlay">
+<div style="text-align:center">
+<h2 style="font-family:'Impact','Arial Black'; font-size:32px; color:#6cffea; text-shadow:0 0 10px #6cffea,0 0 20px #9b5cff;">Lade...</h2>
+<div id="progressBar"><div id="progress"></div></div>
+</div>
+</div>
+
+<script>
+// Master-Key + Kommentare
+const MASTER_HASH='b2b2f104d32c638903e151a9b20d6e27b41d8c0c84cf8458738f83ca2f1dd744';
+const FIXED_COMMENTS=[
+  {id:'c-001',author:'Gigarazor',text:'Willkommen im Mod Forum!',date:'2025-11-01T09:00:00Z'},
+  {id:'c-002',author:'Gigarazor',text:'Rampage ASI Menu für GTAV letzte Version 16.08.2025 ist Aktuell!',date:'2025-11-01T09:00:00Z'},
+  {id:'c-003',author:'Gigarazor',text:'Script Hook V ist auf Version :v3586.0 / 889.22 Aktuelles Updatedatum: 13.August.2025',date:'2025-11-01T09:00:00Z'},
+  {id:'c-004',author:'Gigarazor',text:'YimMenuV2.dll keine neue Version seit August 2025! (Benötigt ein Injektor wie Xenos! ist Aktuell für v1.71!.',date:'2025-11-01T09:05:00Z'},
+  {id:'c-005',author:'Gigarazor',text:'Rampage ASI Menu für Red Dead Redemption 2 letztes Datum : 18.08.2025 ist Aktuell!.',date:'2025-11-01T09:05:00Z'},
+  {id:'c-004',author:'Gigarazor',text:'Script Hook Red Dead Redemption 2 ist Aktuell!, Release 09.02.2023 .',date:'2025-11-01T09:05:00Z'},
+  {id:'c-005',author:'Gigarazor',text:'Script Hook Red Dead Redemption 1 ist Aktuell!, Release 02.02.2025 .',date:'2025-11-01T09:05:00Z'},
+  {id:'c-005',author:'Gigarazor',text:'Rampage Menu für Red Dead Redemption 1 ist Aktuell!,letztes Datum 18.08.2025.',date:'2025-11-01T09:05:00Z'},
+  {id:'c-005',author:'Gigarazor',text:'Gute Trainer für Singleplayer : Fling (Meist Kostenlos :),WeMod,Plitch(Kleine Gebühren! Für Premium!)',date:'2025-11-01T09:05:00Z'}
+];
+
+async function sha256Hex(str){
+  const enc=new TextEncoder();
+  const data=enc.encode(str);
+  const hashBuffer=await crypto.subtle.digest('SHA-256',data);
+  const hashArray=Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+function renderComments(){
+  const wrap=document.getElementById('comments'); wrap.innerHTML='';
+  FIXED_COMMENTS.forEach(c=>{
+    const el=document.createElement('article');
+    el.className='comment';
+    el.innerHTML=`<div class="comment-body"><div style="font-weight:700">${c.author}</div><div style="margin-top:4px">${c.text}</div></div>
+    <div class="comment-gif"><img src="profile.gif" alt="GIF" /></div>
+    <div class="glow-dot"></div>`;
+    wrap.appendChild(el);
+  });
+}
+
+// Hover Sound
+const hoverSound = new Audio('hover.mp3');
+hoverSound.volume = 0.3;
+
+// Partikel
+function startParticlesNetwork(){
+  const canvas = document.getElementById('particlesCanvas');
+  const ctx = canvas.getContext('2d');
+  let w = canvas.width = window.innerWidth;
+  let h = canvas.height = window.innerHeight;
+  window.addEventListener('resize',()=>{ w=canvas.width=window.innerWidth; h=canvas.height=window.innerHeight; });
+
+  const particles=[];
+  const particleCount=60;
+  let hue=270;
+  const mouse={x:w/2,y:h/2};
+  window.addEventListener('mousemove',(e)=>{mouse.x=e.clientX;mouse.y=e.clientY;});
+  for(let i=0;i<particleCount;i++){
+    particles.push({
+      x:Math.random()*w,y:Math.random()*h,
+      r:Math.random()*2+1,
+      dx:(Math.random()-0.5)*0.8,
+      dy:(Math.random()-0.5)*0.8
+    });
+  }
+
+  function animate(){
+    ctx.clearRect(0,0,w,h);
+    particles.forEach(p=>{
+      const px=p.x+(mouse.x-w/2)*0.02;
+      const py=p.y+(mouse.y-h/2)*0.02;
+      ctx.beginPath();
+      ctx.arc(px,py,p.r,0,Math.PI*2);
+      ctx.fillStyle=`hsl(${hue},80%,60%)`;
+      ctx.shadowColor=`hsl(${hue},80%,60%)`;
+      ctx.shadowBlur=8;
+      ctx.fill();
+      p.x+=p.dx; p.y+=p.dy;
+      if(p.x<0||p.x>w)p.dx*=-1;
+      if(p.y<0||p.y>h)p.dy*=-1;
+    });
+    for(let i=0;i<particleCount;i++){
+      for(let j=i+1;j<particleCount;j++){
+        const p1=particles[i], p2=particles[j];
+        const dist=Math.hypot(p1.x-p2.x,p1.y-p2.y);
+        if(dist<150){
+          const px1=p1.x+(mouse.x-w/2)*0.02;
+          const py1=p1.y+(mouse.y-h/2)*0.02;
+          const px2=p2.x+(mouse.x-w/2)*0.02;
+          const py2=p2.y+(mouse.y-h/2)*0.02;
+          ctx.beginPath();
+          ctx.moveTo(px1,py1);
+          ctx.lineTo(px2,py2);
+          ctx.strokeStyle=`hsla(${hue},80%,60%,${1-dist/150})`;
+          ctx.lineWidth=1;
+          ctx.shadowBlur=12;
+          ctx.shadowColor=`hsl(${hue},80%,70%)`;
+          ctx.stroke();
+        }
+      }
+    }
+    hue+=0.5;if(hue>360)hue=0;
+    requestAnimationFrame(animate);
+  }
+  animate();
+}
+
+// Profil puls
+function startProfilePulse(){
+  const profile=document.querySelector('.profile-gif');
+  let phase=0;
+  function pulse(){
+    phase+=0.05;
+    const glow=1+Math.sin(phase)*0.3;
+    profile.style.transform=`scale(${glow})`;
+    profile.style.boxShadow=`0 0 ${12*glow}px rgba(155,92,255,0.5),0 0 ${24*glow}px rgba(107,57,217,0.7)`;
+    requestAnimationFrame(pulse);
+  }
+  pulse();
+}
+
+// Fake Load
+function showFakeLoad(url){
+  const overlay=document.getElementById('loadOverlay');
+  const progress=document.getElementById('progress');
+  overlay.style.display='flex'; progress.style.width='0%';
+  let width=0;
+  const win = window.open('','_blank');
+  const interval=setInterval(()=>{width+=Math.random()*5;if(width>100)width=100;progress.style.width=width+'%';},200);
+  setTimeout(()=>{clearInterval(interval);overlay.style.display='none';win.location.href=url;},10000);
+}
+
+// Card 3D Hover + Sound
+document.querySelectorAll('.card').forEach(card=>{
+  const inner = card.querySelector('.card-inner');
+  card.addEventListener('mousemove', e=>{
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const cx = rect.width/2;
+    const cy = rect.height/2;
+    const dx = (x - cx)/(rect.width/2);
+    const dy = (y - cy)/(rect.height/2);
+    inner.style.setProperty('--rotateY', `${dx*10}deg`);
+    inner.style.setProperty('--rotateX', `${-dy*10}deg`);
+    inner.style.transform = `rotateY(${dx*10}deg) rotateX(${-dy*10}deg) translateZ(10px)`;
+
+    // Hover Sound
+    hoverSound.currentTime = 0;
+    hoverSound.play();
+  });
+  card.addEventListener('mouseleave', e=>{
+    inner.style.setProperty('--rotateY', `0deg`);
+    inner.style.setProperty('--rotateX', `0deg`);
+    inner.style.transform = `rotateY(0deg) rotateX(0deg) translateZ(10px)`;
+  });
+});
+
+// Button Hover Sound
+document.querySelectorAll('button').forEach(btn=>{
+  btn.addEventListener('mouseenter', ()=>{
+    hoverSound.currentTime = 0;
+    hoverSound.play();
+  });
+});
+
+document.getElementById('loginBtn').addEventListener('click',tryUnlock);
+document.getElementById('secretInput').addEventListener('keydown',e=>{if(e.key==='Enter')tryUnlock();});
+document.getElementById('discordBtn').addEventListener('click',()=>showFakeLoad('https://discord.com/invite/UGqxpbrcux'));
+document.getElementById('youtubeBtn').addEventListener('click',()=>showFakeLoad('https://www.youtube.com/@gigarazorlp1911'));
+
+async function tryUnlock(){
+  let val=document.getElementById('secretInput').value||''; val=val.trim();
+  if(!val){alert('Bitte Master-Key eingeben.'); return;}
+  const h=await sha256Hex(val);
+  if(h===MASTER_HASH){
+    document.getElementById('overlay').style.display='none';
+    renderComments();
+    document.getElementById('discordBtn').style.display='inline-flex';
+    document.getElementById('youtubeBtn').style.display='inline-flex';
+    startParticlesNetwork();
+    startProfilePulse();
+  }else alert('Falscher Schlüssel');
+}
+</script>
+</body>
+</html>
